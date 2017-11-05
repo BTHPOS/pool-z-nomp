@@ -51,7 +51,7 @@ setInterval(function(){
 }, conflog.logging.files.flushInterval * 1000);
 
 var PoolInfoLog = function (severity ,system, text, component, dateentry) {
-	var fileName = logDir + '/' + system + '_' + severity + '.log';
+    var fileName = logDir + '/' + system + '_' + severity + '.log';
     var fileLine = dateentry + ' ['+ system +'] ' + '['+ component +'] - ' + text + '\n';
     pendingWrites[fileName] = (pendingWrites[fileName] || '') + fileLine;
 }
@@ -74,7 +74,7 @@ var PoolLogger = function (configuration) {
             text = realText;
             subcat = realSubCat;
         }
-		var dateentry = dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss');
+        var dateentry = dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss');
         var entryDesc = dateentry + ' [' + system + ']\t';
         if (logColors) {
             entryDesc = severityToColor(severity, entryDesc);
@@ -99,8 +99,8 @@ var PoolLogger = function (configuration) {
             logString += text;
         }
 		
-		if(conflog.logging.auth)
-		PoolInfoLog(severity ,system, text, component, dateentry);
+        if(conflog.logging.auth)
+		    PoolInfoLog(severity ,system, text, component, dateentry);
         
         console.log(logString);
 
