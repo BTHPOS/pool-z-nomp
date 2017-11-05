@@ -1,5 +1,5 @@
 {
-    "enabled": true,
+    "enabled": false,
     "coin": "btg_testnet.json",
     
     "address": "",
@@ -35,7 +35,7 @@
         "maxBlocksPerPayment": 3,
         "daemon": {
             "host": "127.0.0.1",
-            "port": 18332,
+            "port": 8332,
             "user": "username",
             "password": "password"
         }
@@ -58,7 +58,7 @@
     "daemons": [
                 {
                 "host": "127.0.0.1",
-                "port": 18332,
+                "port": 8332,
                 "user": "username",
                 "password": "password"
                 }
