@@ -1,6 +1,15 @@
 {
     "logLevel": "debug",
     "logColors": true,
+    
+    "logging": {
+    	"auth": true,
+        "files": {
+            "level": "info",
+            "directory": "logs",
+            "flushInterval": 5
+        }
+        },
 
     "cliPort": 17117,
 

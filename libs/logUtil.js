@@ -1,6 +1,8 @@
+var fs = require('fs');
 var dateFormat = require('dateformat');
 var colors = require('colors');
 
+JSON.minify = JSON.minify || require("node-json-minify");
 
 var severityToColor = function(severity, text) {
     switch(severity) {
@@ -25,6 +27,34 @@ var severityValues = {
     'special': 4
 };
 
+var conflog = JSON.parse(JSON.minify(fs.readFileSync("./config.json", {encoding: 'utf8'})));
+var logDir = conflog.logging.files.directory;
+
+
+if (!fs.existsSync(logDir)){
+    try {
+        fs.mkdirSync(logDir);
+    }
+    catch(e){
+        throw e;
+    }
+}
+
+var pendingWrites = {};
+
+setInterval(function(){
+    for (var fileName in pendingWrites){
+        var data = pendingWrites[fileName];
+        fs.appendFileSync(fileName, data);
+        delete pendingWrites[fileName];
+    }
+}, conflog.logging.files.flushInterval * 1000);
+
+var PoolInfoLog = function (severity ,system, text, component, dateentry) {
+    var fileName = logDir + '/' + system + '_' + severity + '.log';
+    var fileLine = dateentry + ' ['+ system +'] ' + '['+ component +'] - ' + text + '\n';
+    pendingWrites[fileName] = (pendingWrites[fileName] || '') + fileLine;
+}
 
 var PoolLogger = function (configuration) {
 
@@ -44,8 +74,8 @@ var PoolLogger = function (configuration) {
             text = realText;
             subcat = realSubCat;
         }
-
-        var entryDesc = dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss') + ' [' + system + ']\t';
+        var dateentry = dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss');
+        var entryDesc = dateentry + ' [' + system + ']\t';
         if (logColors) {
             entryDesc = severityToColor(severity, entryDesc);
 
@@ -68,7 +98,10 @@ var PoolLogger = function (configuration) {
 
             logString += text;
         }
-
+		
+        if(conflog.logging.auth)
+		    PoolInfoLog(severity ,system, text, component, dateentry);
+        
         console.log(logString);
 
 
