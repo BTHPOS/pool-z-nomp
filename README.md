@@ -82,7 +82,7 @@ Clone the repository and run `npm update` for all the dependencies to be install
 sudo apt-get install build-essential libsodium-dev npm
 sudo npm install n -g
 sudo n stable
-git clone https://github.com/joshuayabut/node-open-mining-portal.git z-nomp
+git clone https://github.com/poolgold/z-nomp-bitcoin-gold.git z-nomp-bitcoin-gold
 cd z-nomp
 npm update
 npm install
