@@ -1212,7 +1212,7 @@ function SetupForPool(logger, poolOptions, setupFinished){
                             if (result.response) {
                                 txid = result.response;
                             }
-                            if (txid !== null) {
+                            if (txid != null) {
 
                                 // it worked, congrats on your pools payout ;)
                                 logger.special(logSystem, logComponent, 'Sent ' + satoshisToCoins(totalSent)
@@ -1225,7 +1225,7 @@ function SetupForPool(logger, poolOptions, setupFinished){
                                 }
 
                                 // save payments data to redis
-                                var paymentBlocks = rounds.filter(function(r){ return r.category === 'generate'; }).map(function(r){
+                                var paymentBlocks = rounds.filter(function(r){ return r.category == 'generate'; }).map(function(r){
                                     return parseInt(r.height);
                                 });
                                 
@@ -1299,7 +1299,7 @@ function SetupForPool(logger, poolOptions, setupFinished){
                 
                 var moveSharesToCurrent = function(r){
                     var workerShares = r.workerShares;
-                    if (workerShares !== null) {
+                    if (workerShares != null) {
                         logger.warning(logSystem, logComponent, 'Moving shares from orphaned block '+r.height+' to current round.');
                         Object.keys(workerShares).forEach(function(worker){
                             orphanMergeCommands.push(['hincrby', coin + ':shares:roundCurrent', worker, workerShares[worker]]);
