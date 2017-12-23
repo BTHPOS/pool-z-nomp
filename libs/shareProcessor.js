@@ -26,6 +26,9 @@ module.exports = function(logger, poolConfig){
     var logComponent = coin;
     var logSubCat = 'Thread ' + (parseInt(forkId) + 1);
     
+    var lastRedisSync = 0;
+    var redisCommands = [];
+    
     var connection = redis.createClient(redisConfig.port, redisConfig.host);
     if (redisConfig.password) {
         connection.auth(redisConfig.password);
@@ -68,8 +71,6 @@ module.exports = function(logger, poolConfig){
 
     this.handleShare = function(isValidShare, isValidBlock, shareData) {
 
-        var redisCommands = [];
-
         if (isValidShare) {
             redisCommands.push(['hincrbyfloat', coin + ':shares:roundCurrent', shareData.worker, shareData.difficulty]);
             redisCommands.push(['hincrby', coin + ':stats', 'validShares', 1]);
@@ -89,15 +90,23 @@ module.exports = function(logger, poolConfig){
             redisCommands.push(['rename', coin + ':shares:timesCurrent', coin + ':shares:times' + shareData.height]);
             redisCommands.push(['sadd', coin + ':blocksPending', [shareData.blockHash, shareData.txHash, shareData.height, shareData.worker, dateNow].join(':')]);
             redisCommands.push(['hincrby', coin + ':stats', 'validBlocks', 1]);
+            lastRedisSync = 0; // in order to submit data to redis
         }
         else if (shareData.blockHash){
             redisCommands.push(['hincrby', coin + ':stats', 'invalidBlocks', 1]);
         }
 
-        connection.multi(redisCommands).exec(function(err, replies){
-            if (err)
-                logger.error(logSystem, logComponent, logSubCat, 'Error with share processor multi ' + JSON.stringify(err));
-        });
+        if (Date.now() - lastRedisSync >= 1000) {
+            lastRedisSync = Date.now();
+            var executionStart = Date.now();
+            var executedOperations = redisCommands.length;
+            connection.multi(redisCommands).exec(function(err, replies){
+                                                 console.log("Share processor Redis execution time: " + (Date.now() - executionStart).toString() + " Executed operations: " + executedOperations.toString());
+                                                 if (err)
+                                                 logger.error(logSystem, logComponent, logSubCat, 'Error with share processor multi ' + JSON.stringify(err));
+                                                 });
+            redisCommands = [];
+        }
     };
 
 };
