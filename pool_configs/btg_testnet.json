@@ -1,29 +1,29 @@
 {
-    "enabled": false,
+    "enabled": true,
     "coin": "btg_testnet.json",
-    
-    "address": "",
+
+    "address": "n1j5Zs2xfJKd6fndZCr6QxX3Yxu1YHZ5v2",
     "_comment_address": "a transparent address to send coinbase rewards to and to transfer to zAddress.",
-    
+
     "zAddress": "",
     "_comment_zAddress": "Not used",
-    
+
     "tAddress": "",
     "_comment_tAddress": "transparent address used to send payments, make this a different address, otherwise payments will not send",
-    
+
     "walletInterval": 5,
-    
+
     "rewardRecipients": {
         "": 1.0
     },
-    
+
     "tlsOptions": {
         "enabled": false,
         "serverKey":"",
         "serverCert":"",
         "ca":""
     },
-    
+
     "paymentProcessing": {
         "minConf": 10,
         "enabled": true,
@@ -34,13 +34,13 @@
         "minimumPayment": 0.1,
         "maxBlocksPerPayment": 3,
         "daemon": {
-            "host": "127.0.0.1",
+            "host": "192.168.1.7",
             "port": 8332,
             "user": "username",
             "password": "password"
         }
     },
-    
+
     "ports": {
         "3857": {
             "tls":false,
@@ -54,26 +54,26 @@
             }
         }
     },
-    
+
     "daemons": [
-                {
-                "host": "127.0.0.1",
-                "port": 8332,
-                "user": "username",
-                "password": "password"
-                }
-                ],
-    
+        {
+        "host": "192.168.1.7",
+        "port": 8332,
+        "user": "bitcoingold",
+        "password": "bitcoingold"
+        }
+    ],
+
     "p2p": {
         "enabled": false,
-        "host": "127.0.0.1",
+        "host": "192.168.1.7",
         "port": 19333,
         "disableTransactions": true
     },
-    
+
     "mposMode": {
         "enabled": false,
-        "host": "127.0.0.1",
+        "host": "192.168.1.7",
         "port": 3306,
         "user": "me",
         "password": "mypass",
@@ -81,5 +81,5 @@
         "checkPassword": true,
         "autoCreateWorker": false
     }
-    
+
 }

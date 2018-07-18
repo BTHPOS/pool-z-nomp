@@ -1,11 +1,8 @@
 {
-    "enabled": true,
+    "enabled": false,
     "coin": "btg.json",
 
-    "address": "n1j5Zs2xfJKd6fndZCr6QxX3Yxu1YHZ5v2",
-
-    "address_testnet": "n1j5Zs2xfJKd6fndZCr6QxX3Yxu1YHZ5v2",
-    "address_mainnet": "Gamj56ncG12wNkJAjDccciH1FVBMy7pNbq",
+    "address": "Gamj56ncG12wNkJAjDccciH1FVBMy7pNbq",
 
     "_comment_address": "a transparent address to send coinbase rewards to and to transfer to zAddress.",
 
