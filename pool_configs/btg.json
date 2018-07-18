@@ -62,7 +62,7 @@
         "user": "bitcoingold",
         "password": "bitcoingold"
         }
-      ],
+    ],
 
     "p2p": {
         "enabled": false,
