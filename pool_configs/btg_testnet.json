@@ -14,7 +14,7 @@
     "walletInterval": 5,
 
     "rewardRecipients": {
-        "": 1.0
+        
     },
 
     "tlsOptions": {
