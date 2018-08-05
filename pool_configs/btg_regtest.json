@@ -44,7 +44,7 @@
     "ports": {
         "3857": {
             "tls":false,
-            "diff": 0.05,
+            "diff": 1,
             "varDiff": {
                 "minDiff": 0.00000005,
                 "maxDiff": 16,
