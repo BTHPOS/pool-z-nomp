@@ -19,14 +19,14 @@
     },
 
     "defaultPoolConfigs": {
-        "blockRefreshInterval": 500,
+        "blockRefreshInterval": 1000,
         "jobRebroadcastTimeout": 55,
         "connectionTimeout": 600,
         "emitInvalidBlockHashes": false,
         "validateWorkerUsername": true,
         "tcpProxyProtocol": false,
         "banning": {
-            "enabled": true,
+            "enabled": false,
             "time": 600,
             "invalidPercent": 50,
             "checkThreshold": 500,
