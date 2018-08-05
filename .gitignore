@@ -3,3 +3,5 @@
 #config.json
 #pool_configs/*.json
 #!pool_configs/zclassic_example.json
+dump.rdb
+logs/
