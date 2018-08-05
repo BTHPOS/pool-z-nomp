@@ -46,7 +46,7 @@
             "tls":false,
             "diff": 0.05,
             "varDiff": {
-                "minDiff": 0.04,
+                "minDiff": 0.00000005,
                 "maxDiff": 16,
                 "targetTime": 15,
                 "retargetTime": 60,
