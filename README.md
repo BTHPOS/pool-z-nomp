@@ -1,68 +1,30 @@
-# Zcash® and Zclassic - Node Open Mining Portal
+# Bithereum Mining Pool
 
-**[Click here for the official - Zcash® Zclassic, Bitcoin Gold Stratum Mining Pool Installation Guide](https://zdeveloper.org/wiki:z-nomp_install)**
-
-This is a Equihash mining pool based off of Node Open Mining Portal.
-
-Donations for development are greatly appreciated!
-  * BTC: 12Yc3Ezayhnm4X9x3nxV7vWY1h2qpWgajc, 18vHMxVzotQ9EPyESrf7Z1hNM9AwJeVHgD
-  * ZCL: zcXDWbgReztLLXSTUMT2nEumiDM6zTzUXFb7vUnx9JNfJDVqbodyxwEQwgDkFw7Dp128tBU8n8rmVxT43DshmeTEM4LHcdz
-
-#### Production Usage Notice
-This is beta software. All of the following are things that can change and break an existing Z-NOMP setup: functionality of any feature, structure of configuration files and structure of redis data. If you use this software in production then *DO NOT* pull new code straight into production usage because it can and often will break your setup and require you to tweak things like config files or redis data. *Only tagged releases are considered stable.*
-
-#### Paid Solution
-Usage of this software requires abilities with sysadmin, database admin, coin daemons, and sometimes a bit of programming. Running a production pool can literally be more work than a full-time job. 
-
-
-### Community / Support
-IRC
-* Support / general discussion join: https://gitter.im/zclassicorg/z-nomp
-
-If your pool uses Z-NOMP let us know and we will list your website here.
-
-### Some pools using Z-NOMP or node-stratum-module:
-
-http://pool.gold - Bitcoin Gold Pool
-
-https://pool.cryptobroker.io/zcl Running MPOS and 0.5% of the fee goes to the Zclassic donation fund! 200+ blocks have been found as well! 
-
-http://luckpool.org Zcash Pool with Custom Frontend w/Miner's Jackpot
-
-http://zclmine.com/ Custom frontend
-
-http://zclassic.miningspeed.com Custom frontend and 0% fee
-
-https://zpool.it 0.5% fee
-
-http://miningpool.io/
-
-Usage
-=====
-
+Feel free to run your own bithereum pool if you have the resources and expertise to handle the work involved in maintaining one. The code within this repo is a forked version of z-nomp modified for Equihash coins. 
 
 #### Requirements
 * Coin daemon(s) (find the coin's repo and build latest version from source)
-* [Node.js](http://nodejs.org/) v7+ ([follow these installation instructions](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager))
-* [Redis](http://redis.io/) key-value store v2.6+ ([follow these instructions](http://redis.io/topics/quickstart))
+* [Node.js](http://nodejs.org/) v7 ([How to install node](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager))
+* [Redis](http://redis.io/) key-value store v2.6+ ([How to install redis](http://redis.io/topics/quickstart))
 
-##### Seriously
-Those are legitimate requirements. If you use old versions of Node.js or Redis that may come with your system package manager then you will have problems. Follow the linked instructions to get the last stable versions.
+### House keeping
 
-
-[**Redis security warning**](http://redis.io/topics/security): be sure firewall access to redis - an easy way is to
+* [Redis security warning](http://redis.io/topics/security): be sure firewall access to redis - an easy way is to
 include `bind 127.0.0.1` in your `redis.conf` file. Also it's a good idea to learn about and understand software that
 you are using - a good place to start with redis is [data persistence](http://redis.io/topics/persistence).
 
+##### Make sure you have done all the requirements
+Those are legitimate requirements. If you use old versions of Node.js or Redis that may come with your system package manager then you will have problems. Follow the linked instructions to get the last stable versions.
 
-#### 0) Setting up coin daemon
-Follow the build/install instructions for your coin daemon. Your coin.conf file should end up looking something like this:
-```
+## Step 1: Setting up coin daemon
+Follow the installation instructions for your bithereum daemon. Your bithereum.conf file should end up looking something like th
+```conf
 daemon=1
-rpcuser=zclassicrpc
-rpcpassword=securepassword
-rpcport=8232
+rpcuser=bithereum
+rpcpassword=bithereum
+rpcport=8332
 ```
+
 For redundancy, its recommended to have at least two daemon instances running in case one drops out-of-sync or offline,
 all instances will be polled for block/transaction updates and be used for submitting blocks. Creating a backup daemon
 involves spawning a daemon using the `-datadir=/backup` command-line argument which creates a new daemon instance with
@@ -74,22 +36,27 @@ a good pool operator. For starters be sure to read:
    * https://en.bitcoin.it/wiki/Difficulty
 
 
-#### 1) Downloading & Installing
+## Step 2: Downloading & Installing
 
 Clone the repository and run `npm update` for all the dependencies to be installed:
 
 ```bash
-sudo apt-get install build-essential libsodium-dev npm
-sudo npm install n -g
-sudo n stable
-git clone https://github.com/poolgold/z-nomp-bitcoin-gold.git z-nomp-bitcoin-gold
-cd z-nomp-bitcoin-gold
+sudo apt-get update -y
+sudo apt-get install npm -y
+sudo npm install n -g -y
+sudo n v7
+
+sudo apt update
+sudo apt install redis-server -y
+
+git clone https://github.com/BTHPOS/pool-z-nomp.git pool
+cd pool
 npm update
 npm install
 ```
 
-##### Pool config
-Take a look at the example json file inside the `pool_configs` directory. Rename it to `zclassic.json` and change the
+## Step 3: Configure Pool
+Take a look at the example json file inside the `pool_configs` directory. Rename it to `bithereum.json` and change the
 example fields to fit your setup.
 
 ```
@@ -116,7 +83,7 @@ Alternatively, you can use a more efficient block notify script written in pure 
 are commented in [scripts/blocknotify.c](scripts/blocknotify.c).
 
 
-#### 3) Start the portal
+## Step 4: Start the Pool
 
 ```bash
 npm start
@@ -140,9 +107,11 @@ the `node-stratum-pool` and `node-multi-hashing` modules, and any config files t
 * Run `npm update` to force updating/reinstalling of the dependencies.
 * Compare your `config.json` and `pool_configs/coin.json` configurations to the latest example ones in this repo or the ones in the setup instructions where each config field is explained. <b>You may need to modify or add any new changes.</b>
 
-
 Credits
 -------
+### Bithereum
+* [Dondrey Taylor / dondreytaylor](https://github.com/dondreytaylor)
+
 ### Z-NOMP
 * [Joshua Yabut / movrcx](https://github.com/joshuayabut)
 * [Aayan L / anarch3](https://github.com/aayanl)
@@ -161,7 +130,6 @@ Credits
 * [icecube45](//github.com/icecube45) - helping out with the repo wiki
 * [Fcases](//github.com/Fcases) - ordered me a pizza <3
 * Those that contributed to [node-stratum-pool](//github.com/zone117x/node-stratum-pool#credits)
-
 
 License
 -------
