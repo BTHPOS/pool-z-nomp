@@ -19,7 +19,7 @@ rpcport=8332
 ```
 
 ## Step 2: Downloading & Installing
-Clone the repository and run `npm update` for all the dependencies to be installed:
+Clone this repository and run `npm update` for all the dependencies to be installed:
 
 ```bash
 sudo apt-get update -y
