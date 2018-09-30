@@ -3,18 +3,11 @@
 Feel free to run your own bithereum pool if you have the resources and expertise to handle the work involved in maintaining one. The code within this repo is a forked version of z-nomp modified for Equihash coins. 
 
 #### Requirements
-* Coin daemon(s) (find the coin's repo and build latest version from source)
+* Bithereum daemon (refer to [Bithereum's core repo](https://github.com/BTHPOS/BTH))
 * [Node.js](http://nodejs.org/) v7 ([How to install node](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager))
 * [Redis](http://redis.io/) key-value store v2.6+ ([How to install redis](http://redis.io/topics/quickstart))
 
-### House keeping
-
-* [Redis security warning](http://redis.io/topics/security): be sure firewall access to redis - an easy way is to
-include `bind 127.0.0.1` in your `redis.conf` file. Also it's a good idea to learn about and understand software that
-you are using - a good place to start with redis is [data persistence](http://redis.io/topics/persistence).
-
-##### Make sure you have done all the requirements
-Those are legitimate requirements. If you use old versions of Node.js or Redis that may come with your system package manager then you will have problems. Follow the linked instructions to get the last stable versions.
+Make sure you have done all the requirements before continuing. If you use old versions of Node.js or Redis that may come with your system package manager then you will have problems. Follow the linked instructions to get the last stable versions.
 
 ## Step 1: Setting up coin daemon
 Follow the installation instructions for your bithereum daemon. Your bithereum.conf file should end up looking something like th
@@ -25,19 +18,7 @@ rpcpassword=bithereum
 rpcport=8332
 ```
 
-For redundancy, its recommended to have at least two daemon instances running in case one drops out-of-sync or offline,
-all instances will be polled for block/transaction updates and be used for submitting blocks. Creating a backup daemon
-involves spawning a daemon using the `-datadir=/backup` command-line argument which creates a new daemon instance with
-it's own config directory and coin.conf file. Learn about the daemon, how to use it and how it works if you want to be
-a good pool operator. For starters be sure to read:
-   * https://en.bitcoin.it/wiki/Running_bitcoind
-   * https://en.bitcoin.it/wiki/Data_directory
-   * https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list
-   * https://en.bitcoin.it/wiki/Difficulty
-
-
 ## Step 2: Downloading & Installing
-
 Clone the repository and run `npm update` for all the dependencies to be installed:
 
 ```bash
@@ -67,8 +48,40 @@ Whenever a miner submits a share, the pool counts the difficulty and keeps addin
 ie: Miner 1 mines at 0.1 difficulty and finds 10 shares, the pool sees it as 1 share. Miner 2 mines at 0.5 difficulty and finds 5 shares, the pool sees it as 2.5 shares. 
 ```
 
+## Step 4: Start the Pool
 
-##### [Optional, recommended] Setting up blocknotify
+```bash
+npm start
+```
+
+## Additional Notes
+
+* [Redis security warning](http://redis.io/topics/security): be sure firewall access to redis - an easy way is to
+include `bind 127.0.0.1` in your `redis.conf` file. Also it's a good idea to learn about and understand software that
+you are using - a good place to start with redis is [data persistence](http://redis.io/topics/persistence).
+
+* For redundancy, its recommended to have at least two Bithereum daemon instances running in case one drops out-of-sync or offline,
+all instances will be polled for block/transaction updates and be used for submitting blocks. Creating a backup daemon
+involves spawning a daemon using the `-datadir=/backup` command-line argument which creates a new daemon instance with
+it's own config directory and coin.conf file. Learn about the daemon, how to use it and how it works if you want to be
+a good pool operator. For starters be sure to read:
+   * https://en.bitcoin.it/wiki/Running_bitcoind
+   * https://en.bitcoin.it/wiki/Data_directory
+   * https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_Calls_list
+   * https://en.bitcoin.it/wiki/Difficulty
+   
+* Use something like [forever](https://github.com/nodejitsu/forever) to keep the node script running
+in case the master process crashes. 
+
+* Use something like [redis-commander](https://github.com/joeferner/redis-commander) to have a nice GUI
+for exploring your redis database.
+
+* Use something like [logrotator](http://www.thegeekstuff.com/2010/07/logrotate-examples/) to rotate log 
+output from Z-NOMP.
+
+* Use [New Relic](http://newrelic.com/) to monitor your Z-NOMP instance and server performance.
+
+## Setting up blocknotify (Optional)
 1. In `config.json` set the port and password for `blockNotifyListener`
 2. In your daemon conf file set the `blocknotify` command to use:
 ```
@@ -82,24 +95,7 @@ blocknotify=node /home/user/z-nomp/scripts/cli.js blocknotify zclassic %s
 Alternatively, you can use a more efficient block notify script written in pure C. Build and usage instructions
 are commented in [scripts/blocknotify.c](scripts/blocknotify.c).
 
-
-## Step 4: Start the Pool
-
-```bash
-npm start
-```
-
-###### Optional enhancements for your awesome new mining pool server setup:
-* Use something like [forever](https://github.com/nodejitsu/forever) to keep the node script running
-in case the master process crashes. 
-* Use something like [redis-commander](https://github.com/joeferner/redis-commander) to have a nice GUI
-for exploring your redis database.
-* Use something like [logrotator](http://www.thegeekstuff.com/2010/07/logrotate-examples/) to rotate log 
-output from Z-NOMP.
-* Use [New Relic](http://newrelic.com/) to monitor your Z-NOMP instance and server performance.
-
-
-#### Upgrading Z-NOMP
+## Upgrading Z-NOMP
 When updating Z-NOMP to the latest code its important to not only `git pull` the latest from this repo, but to also update
 the `node-stratum-pool` and `node-multi-hashing` modules, and any config files that may have been changed.
 * Inside your Z-NOMP directory (where the init.js script is) do `git pull` to get the latest Z-NOMP code.
