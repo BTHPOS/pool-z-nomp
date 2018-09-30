@@ -10,7 +10,7 @@ Feel free to run your own bithereum pool if you have the resources and expertise
 Make sure you have done all the requirements before continuing. If you use old versions of Node.js or Redis that may come with your system package manager then you will have problems. Follow the linked instructions to get the last stable versions.
 
 ## Step 1: Setting up coin daemon
-Follow the installation instructions for your bithereum daemon. Your bithereum.conf file should end up looking something like th
+Follow the installation instructions for your bithereum daemon. Your bithereum.conf file (usually located in ~/.bithereum/ folder by default) should end up looking something like the following.
 ```conf
 daemon=1
 rpcuser=bithereum
