@@ -23,16 +23,16 @@ rpcport=8332
 Clone this repository run the following commands from within the root level of the cloned folder. Alternatively, you can install this pool by using the pool [installation script here](https://github.com/BTHPOS/installation-scripts).
 
 ```bash
-$ sudo apt-get update -y
-$ sudo apt-get install npm -y
-$ sudo npm install n -g -y
-$ sudo n v7
-$ sudo apt update
-$ sudo apt install redis-server -y
-$ git clone https://github.com/BTHPOS/pool-z-nomp.git pool
-$ cd pool
-$ npm update
-$ npm install
+sudo apt-get update -y
+sudo apt-get install npm -y
+sudo npm install n -g -y
+sudo n v7
+sudo apt update
+sudo apt install redis-server -y
+git clone https://github.com/BTHPOS/pool-z-nomp.git pool
+cd pool
+npm update
+npm install
 ```
 
 ## Step 3: Configure Pool
