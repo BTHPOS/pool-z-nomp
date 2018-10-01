@@ -1,0 +1,6 @@
+{
+    "name": "Testnet Bithereum",
+    "symbol": "TBTH",
+    "algorithm": "equihash",
+    "txfee": 0.000005
+}

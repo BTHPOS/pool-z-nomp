@@ -1,0 +1,6 @@
+{
+    "name": "Bithereum",
+    "symbol": "BTH",
+    "algorithm": "equihash",
+    "txfee": 0.000005
+}
