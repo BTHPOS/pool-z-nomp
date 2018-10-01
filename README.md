@@ -12,6 +12,7 @@ Make sure you have done all the requirements before continuing. If you use old v
 ## Step 1: Setting up coin daemon
 Follow the installation instructions for your bithereum daemon. Your bithereum.conf file (usually located in ~/.bithereum/ folder by default) should end up looking something like the following.
 ```conf
+txindex=1
 daemon=1
 rpcuser=bithereum
 rpcpassword=bithereum
