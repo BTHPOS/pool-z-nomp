@@ -43,7 +43,7 @@
         "enabled": true,
         "host": "0.0.0.0",
         "port": 8080,
-        "stratumHost": "192.168.1.16",
+        "stratumHost": "pool-testnet.bithereum.network",
         "stats": {
             "updateInterval": 30,
             "historicalRetention": 14400,

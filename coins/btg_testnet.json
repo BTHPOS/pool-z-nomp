@@ -1,7 +1,0 @@
-{
-    "name": "Testcoin Gold",
-    "symbol": "TTG",
-    "algorithm": "equihash",
-    "txfee": 0.000005
-}
-
