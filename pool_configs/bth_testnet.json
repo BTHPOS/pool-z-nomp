@@ -2,7 +2,7 @@
     "enabled": true,
     "coin": "bth_testnet.json",
 
-    "address": "ms5YGqYrsKHzhGaACPfAZVPxhGfa3GdhdC",
+    "address": "TXEFuiNYtyhxBPgfeFbHoN2H4tVS1HBSaR",
     "_comment_address": "a transparent address to send coinbase rewards to and to transfer to zAddress.",
 
     "zAddress": "",
