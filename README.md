@@ -36,8 +36,7 @@ npm install
 ```
 
 ## Step 3: Configure Pool
-Take a look at the example json file inside the `pool_configs` directory. Rename it to `bithereum.json` and change the
-example fields to fit your setup.
+Update `bth.json` or `bth_testnet.json` to fit the changes you would like for your pool. Each file will have an enabled field at the top of the JSON. Set enabled equal to true for the file you would like to use. Be sure config files not in use have enabled set to false.
 
 ## Step 4: Start the Pool
 
