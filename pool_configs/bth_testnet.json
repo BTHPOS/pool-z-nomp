@@ -35,7 +35,7 @@
         "maxBlocksPerPayment": 3,
         "daemon": {
             "host": "node1-testnet.bithereum.network",
-            "port": 8332,
+            "port": 19554,
             "user": "bithereum",
             "password": "bithereum"
         }
@@ -58,13 +58,13 @@
     "daemons": [
         {
             "host": "node1-testnet.bithereum.network",
-            "port": 8332,
+            "port": 19554,
             "user": "bithereum",
             "password": "bithereum"
         },
         {
             "host": "node2-testnet.bithereum.network",
-            "port": 8332,
+            "port": 19554,
             "user": "bithereum",
             "password": "bithereum"
         }
@@ -73,7 +73,7 @@
     "p2p": {
         "enabled": false,
         "host": "node1-testnet.bithereum.network",
-        "port": 18444,
+        "port": 19553,
         "disableTransactions": true
     },
 
